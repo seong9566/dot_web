@@ -11,11 +11,9 @@ class SearchField extends StatefulWidget {
 class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
-    ///TODO : 높이 80되어야함.
-
     return SizedBox(
-      width: 924,
-      height: 80,
+      width: 608,
+      height: 44,
       child: TextField(
         decoration: InputDecoration(
           contentPadding:
@@ -36,7 +34,7 @@ class _SearchFieldState extends State<SearchField> {
             padding: EdgeInsets.only(right: 16),
             child: Icon(
               Icons.search,
-              size: 40,
+              size: 24,
             ),
           ),
         ),

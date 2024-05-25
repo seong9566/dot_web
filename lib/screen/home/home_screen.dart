@@ -1,3 +1,4 @@
+import 'package:do_in_web/screen/widget/animated_bottom_nav.dart';
 import 'package:do_in_web/screen/widget/banner_item.dart';
 import 'package:do_in_web/screen/widget/search_field.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +9,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 80),
-              SearchField(),
-              SizedBox(height: 80),
-              BannerItem(),
-              SizedBox(height: 300),
-            ],
-          ),
+      body: _body(),
+      bottomNavigationBar: AnimatedBottomNavBar(),
+      extendBody: true,
+    );
+  }
+
+  Widget _body() {
+    return const SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 80),
+            SearchField(),
+            SizedBox(height: 80),
+            BannerItem(),
+            SizedBox(height: 300),
+          ],
         ),
       ),
     );
