@@ -14,8 +14,6 @@ class AnimatedBottomNavBar extends StatefulWidget {
 class _AnimatedBottomNavBarState extends State<AnimatedBottomNavBar> {
   double _height = 80.0; // 초기 높이
   double _width = 656;
-  // double _height = 526.0;
-  // double _width = 924.0;
   bool onHover = false;
 
   double _bottomPadding = 6.0;

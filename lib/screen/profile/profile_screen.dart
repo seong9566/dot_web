@@ -1,5 +1,6 @@
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
+import 'package:do_in_web/screen/widget/animated_bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 
@@ -45,23 +46,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 160),
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              const SizedBox(height: 80),
-              const SearchField(),
-              const SizedBox(height: 80),
-              SwiperCardWidget(
-                cardItem: profileVm.profileImageCardList,
-                isButtonVisible: isButtonVisible(),
-              ),
-              const SizedBox(height: 300),
-            ],
-          ),
+      body: _body(context),
+      bottomNavigationBar: AnimatedBottomNavBar(),
+      extendBody: true,
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 160),
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            const SizedBox(height: 80),
+            const SearchField(),
+            const SizedBox(height: 80),
+            SwiperCardWidget(
+              cardItem: profileVm.profileImageCardList,
+              isButtonVisible: isButtonVisible(),
+            ),
+            const SizedBox(height: 300),
+          ],
         ),
       ),
     );
