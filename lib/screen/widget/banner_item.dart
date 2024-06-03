@@ -9,21 +9,32 @@ class BannerItem extends StatefulWidget {
 }
 
 class _BannerItemState extends State<BannerItem> {
+  final double bannerWidget = 1240.0;
+  final double bannerHeight = 540.0;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 1240,
+      width: bannerWidget,
       child: Column(
         children: [
           Container(
-            width: 1240,
-            height: 540,
-            decoration: const BoxDecoration(
+            width: bannerWidget,
+            height: bannerHeight,
+            decoration: BoxDecoration(
               color: Colors.blueAccent,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(270),
                 bottomRight: Radius.circular(270),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2), // 그림자의 색상과 불투명도 조절
+                  spreadRadius: 5, // 그림자의 확산 정도
+                  blurRadius: 9, // 그림자의 흐림 정도
+                  offset: const Offset(0, 1), // 그림자의 위치 조정 (x, y)
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 20),
@@ -36,6 +47,7 @@ class _BannerItemState extends State<BannerItem> {
   Widget nameAndContent() {
     return const Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,22 +77,26 @@ class _BannerItemState extends State<BannerItem> {
             ),
           ],
         ),
-        LikeAndViewCounter(
-          icon: Icon(
-            Icons.favorite_border,
-            color: Colors.red,
-            size: 40,
-          ),
-          counter: "88",
-        ),
-        SizedBox(width: 12),
-        LikeAndViewCounter(
-          icon: Icon(
-            Icons.remove_red_eye_outlined,
-            color: Colors.black,
-            size: 40,
-          ),
-          counter: "88",
+        Row(
+          children: [
+            LikeAndViewCounter(
+              icon: Icon(
+                Icons.favorite_border,
+                color: Colors.red,
+                size: 40,
+              ),
+              counter: "88",
+            ),
+            SizedBox(width: 12),
+            LikeAndViewCounter(
+              icon: Icon(
+                Icons.remove_red_eye_outlined,
+                color: Colors.black,
+                size: 40,
+              ),
+              counter: "88",
+            ),
+          ],
         ),
       ],
     );

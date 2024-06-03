@@ -8,19 +8,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 80),
-              SearchField(),
-              SizedBox(height: 80),
-              BannerItem(),
-              SizedBox(height: 300),
-            ],
-          ),
+      body: _body(),
+    );
+  }
+
+  Widget _body() {
+    return const SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 80),
+            SearchField(),
+            SizedBox(height: 80),
+            BannerItem(),
+            SizedBox(height: 300),
+          ],
         ),
       ),
     );
