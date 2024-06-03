@@ -2,7 +2,6 @@ import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:do_in_web/screen/widget/animated_bottom_nav.dart';
 import 'package:flutter/material.dart';
-import 'package:hovering/hovering.dart';
 
 import '../widget/search_field.dart';
 
