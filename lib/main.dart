@@ -1,5 +1,6 @@
 import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/home/home_screen.dart';
+import 'package:do_in_web/screen/profile/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -18,12 +19,17 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => DefaultLayout(page: HomeScreen()),
+        builder: (context, state) => HomeScreen(),
         routes: [
           GoRoute(
             path: 'profile',
             name: 'profile',
-            builder: (context, state) => DefaultLayout(page: ProfileScreen()),
+            builder: (context, state) => ProfileScreen(),
+          ),
+          GoRoute(
+            path: 'profile_edit',
+            name: 'profile_edit',
+            builder: (context, state) => ProfileEditScreen(),
           ),
         ],
       ),

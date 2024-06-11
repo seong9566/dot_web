@@ -1,6 +1,7 @@
+import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
+import 'package:do_in_web/screen/profile/widget/profile_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
-import 'package:do_in_web/screen/widget/animated_bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/search_field.dart';
@@ -45,22 +46,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _body(context),
-      bottomNavigationBar: AnimatedBottomNavBar(),
+      body: _body(),
+      bottomNavigationBar: ProfileBottomNav(),
+      //TODO: extendBody:true 해주지 않으면 bottomNav가 화면 전체 영역을 엎음.
       extendBody: true,
     );
   }
 
-  Widget _body(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 160),
-        width: MediaQuery.of(context).size.width,
+  Widget _body() {
+    return DefaultLayout(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: 80),
-            const SearchField(),
+            SearchField(
+              leftIcon: true,
+              callback: () {
+                print("프로필 아이콘 클릭");
+              },
+            ),
             const SizedBox(height: 80),
             SwiperCardWidget(
               cardItem: profileVm.profileImageCardList,

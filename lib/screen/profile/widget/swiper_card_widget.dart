@@ -85,7 +85,7 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
         padding: const EdgeInsets.symmetric(vertical: 2),
         margin: const EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
-          color: ColorAssets.bannerPlusButtonColor,
+          color: ColorAssets.greyColor,
           borderRadius: BorderRadius.circular(20),
         ),
         child: const Center(

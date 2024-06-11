@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 80),
-            SearchField(),
+            SearchField(leftIcon: false),
             SizedBox(height: 80),
             BannerItem(),
             SizedBox(height: 300),
