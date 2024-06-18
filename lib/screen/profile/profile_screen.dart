@@ -68,6 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 80),
             SwiperCardWidget(
+              isEdit: false,
               cardItem: profileVm.profileImageCardList,
               isButtonVisible: isButtonVisible(),
             ),

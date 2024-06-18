@@ -1,6 +1,6 @@
 import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/home/home_screen.dart';
-import 'package:do_in_web/screen/profile/profile_edit_screen.dart';
+import 'package:do_in_web/screen/profile/edit/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

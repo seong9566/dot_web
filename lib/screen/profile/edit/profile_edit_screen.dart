@@ -1,6 +1,8 @@
 import 'package:do_in_web/screen/default_layout.dart';
+import 'package:do_in_web/screen/profile/edit/widget/edit_contents_screen.dart';
+import 'package:do_in_web/screen/profile/edit/widget/edit_widgets_screen.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
-import 'package:do_in_web/screen/profile/widget/profile_widget_bottom_nav.dart';
+import 'package:do_in_web/screen/profile/edit/widget/profile_widget_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:do_in_web/screen/widget/widget_utils.dart';
 import 'package:do_in_web/util/color_assets.dart';
@@ -17,8 +19,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final ProfileViewModel profileVm = ProfileViewModel();
   Function()? listener;
 
-  bool isWidgetBtnClick = true;
-  bool isContentsBtnClick = false;
+  bool isWidgetBtnClick = false;
+  bool isContentsBtnClick = true;
 
   double widgetAndContentsWidget = 156.0;
   double widgetAndContentsHeight = 40.0;
@@ -41,14 +43,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     super.dispose();
   }
 
-  bool isButtonVisible() {
-    if (profileVm.profileImageCardList.length > 4) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +53,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   Widget _body() {
+    Widget body;
+    if (isContentsBtnClick) {
+      body = EditContentsScreen();
+    } else {
+      body = EditWidgetsScreen();
+    }
+
     return DefaultLayout(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -66,10 +67,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           children: [
             const SizedBox(height: 116),
             widgetAndContentBtn(),
-            SwiperCardWidget(
-              cardItem: profileVm.profileImageCardList,
-              isButtonVisible: isButtonVisible(),
-            ),
+            body,
           ],
         ),
       ),

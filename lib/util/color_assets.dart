@@ -5,6 +5,7 @@ class ColorAssets {
 
   static Color bannerButtonColor = const Color(0xFFF8F8F8);
   static Color greyColor = const Color(0xFFD9D9D9);
+  static Color cancelButtonColor = const Color(0xffFF0000);
 
   static Color bottomNavColor = const Color(0xFFD8D8D8);
   static Color bottomNavEditBtnColor = const Color(0xFFB8B8B8);

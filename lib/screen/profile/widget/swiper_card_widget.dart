@@ -7,8 +7,12 @@ import 'package:flutter/widgets.dart';
 class SwiperCardWidget extends StatefulWidget {
   final dynamic cardItem;
   final bool isButtonVisible;
+  final bool isEdit;
   const SwiperCardWidget(
-      {super.key, this.cardItem, required this.isButtonVisible});
+      {super.key,
+      this.cardItem,
+      required this.isButtonVisible,
+      required this.isEdit});
 
   @override
   State<SwiperCardWidget> createState() => _SwipCardWidgetState();
@@ -101,11 +105,71 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
     );
   }
 
+  /// 수정 일 경우 edit 버튼 클릭
+  Widget editButton(
+      {required VoidCallback editCallback,
+      required VoidCallback cancelCallback}) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 16),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: editCallback,
+            child: Container(
+              width: 48,
+              height: 20,
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              margin: const EdgeInsets.only(right: 12),
+              decoration: BoxDecoration(
+                color: ColorAssets.primaryColor.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  "EDIT",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: ColorAssets.blackColor,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: cancelCallback,
+            child: Container(
+              width: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorAssets.cancelButtonColor.withOpacity(0.3),
+              ),
+              child: const Center(
+                child: Text(
+                  "X",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget itemListView() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        plusButton(() {}),
+        (widget.isEdit)
+            ? editButton(
+                cancelCallback: () {},
+                editCallback: () {},
+              )
+            : plusButton(() {}),
         const SizedBox(height: 8),
         SizedBox(
           width: totalWidth * 4,
