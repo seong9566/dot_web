@@ -1,4 +1,5 @@
 import 'package:do_in_web/model/chat_model.dart';
+import 'package:do_in_web/screen/widget/dot_dialog.dart';
 import 'package:do_in_web/util/color_assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -76,7 +77,7 @@ class _ProfileContentsBottomNavState extends State<ProfileContentsBottomNav> {
           child: Stack(
             children: [
               afterHover(),
-              widgetAndPageBtn(),
+              mainButton(),
               bottomNavItems(),
             ],
           ),
@@ -207,7 +208,7 @@ class _ProfileContentsBottomNavState extends State<ProfileContentsBottomNav> {
     );
   }
 
-  Widget widgetAndPageBtn() {
+  Widget mainButton() {
     return Positioned(
       bottom: _bottomPadding,
       left: 8,
@@ -224,7 +225,9 @@ class _ProfileContentsBottomNavState extends State<ProfileContentsBottomNav> {
         child: Center(
           child: GestureDetector(
             onTap: () {
-              profileVm.moveSelectedItems();
+              // profileVm.moveSelectedItems();
+              DotDialog().showMoveContentsDialog(
+                  context, profileVm.selectedItems.length);
             },
             child: MouseRegion(
               onEnter: (PointerEnterEvent event) => setState(() {

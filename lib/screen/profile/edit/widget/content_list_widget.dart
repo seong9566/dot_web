@@ -42,7 +42,7 @@ class _ContentListWidgetState extends State<ContentListWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 924,
-      height: widget.data.length * 154.0,
+      height: widget.data.length * 174.0,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         physics: const NeverScrollableScrollPhysics(),

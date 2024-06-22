@@ -9,12 +9,16 @@ class ProfileViewModel extends ChangeNotifier {
   factory ProfileViewModel() => _instance;
 
   List<DumyContents> filteredItem = [];
-  /*
-  * 새로 추가된 부분
-  * */
+
+  final List<DumyContents> items = contentsList;
+  List<String> typeList = ["Type"];
+  List<String> widgetNameList = ["All Widgets"];
+  List<String> tagList = ["Tags"];
+  List<String> dateList = ["Date", "최신순", "오래된 순"];
 
   bool get isAllChecked => selectedItems.length == items.length;
   Set<DumyContents> selectedItems = {};
+
   void toggleAllSelection(bool isSelected) {
     if (isSelected) {
       selectedItems = items.toSet();
@@ -33,9 +37,14 @@ class ProfileViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void moveSelectedItems() {
+  Future<void> moveSelectedItems() async {
     // 선택된 아이템 이동 로직 구현
-    print("Moving items: ${selectedItems}");
+    print(
+        "moveSelectedItems: ${selectedItems.map((item) => item.title).toList()}");
+    items.removeWhere((item) => selectedItems.contains(items.indexOf(item)));
+    filteredItem.removeWhere((item) => selectedItems.contains(item));
+    selectedItems.clear();
+    notifyListeners();
   }
 
   void deleteSelectedItems() {
@@ -47,16 +56,6 @@ class ProfileViewModel extends ChangeNotifier {
     print("Delete후 아이템 : ${filteredItem.length}");
     notifyListeners();
   }
-
-  /*
-  * 여기까지
-  * */
-
-  final List<DumyContents> items = contentsList;
-  List<String> typeList = ["Type"];
-  List<String> widgetNameList = ["All Widgets"];
-  List<String> tagList = ["Tags"];
-  List<String> dateList = ["Date", "최신순", "오래된 순"];
 
   final List<ProfileImageCard> profileImageCardList = [
     ProfileImageCard('assets/testImage1.png', '이미지 제목1'),

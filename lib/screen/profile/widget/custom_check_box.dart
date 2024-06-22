@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../profile_view_model.dart';
-
 class CustomCheckBox extends StatefulWidget {
   final bool isChecked;
   final Function(bool) onChanged;

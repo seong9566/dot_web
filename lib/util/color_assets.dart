@@ -11,6 +11,7 @@ class ColorAssets {
   static Color bottomNavEditBtnColor = const Color(0xFFB8B8B8);
   static Color blackColor = const Color(0xff000000);
   static Color whiteColor = const Color(0xffffffff);
+  static Color greenColor = const Color(0xff41BB41);
 
   static Color profileTopBtn = const Color(0xffFFF2F2);
 }
