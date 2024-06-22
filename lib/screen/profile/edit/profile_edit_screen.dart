@@ -1,6 +1,7 @@
 import 'package:do_in_web/screen/default_layout.dart';
-import 'package:do_in_web/screen/profile/edit/widget/edit_contents_screen.dart';
-import 'package:do_in_web/screen/profile/edit/widget/edit_widgets_screen.dart';
+import 'package:do_in_web/screen/profile/edit/widget/edit_contents_widget.dart';
+import 'package:do_in_web/screen/profile/edit/widget/edit_widgets_widget.dart';
+import 'package:do_in_web/screen/profile/edit/widget/profile_contents_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/screen/profile/edit/widget/profile_widget_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
@@ -47,7 +48,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _body(),
-      bottomNavigationBar: ProfileWidgetBottomNav(),
+      bottomNavigationBar: isContentsBtnClick
+          ? ProfileContentsBottomNav()
+          : ProfileWidgetBottomNav(),
       extendBody: true,
     );
   }
