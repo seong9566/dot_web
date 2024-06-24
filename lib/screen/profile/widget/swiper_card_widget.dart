@@ -6,13 +6,13 @@ import 'package:flutter/widgets.dart';
 
 class SwiperCardWidget extends StatefulWidget {
   final dynamic cardItem;
-  final bool isButtonVisible;
+  final int itemLength;
   final bool isEdit;
   const SwiperCardWidget(
       {super.key,
       this.cardItem,
-      required this.isButtonVisible,
-      required this.isEdit});
+      required this.isEdit,
+      required this.itemLength});
 
   @override
   State<SwiperCardWidget> createState() => _SwipCardWidgetState();
@@ -23,6 +23,14 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
   final double cardItemWidth = 292.0;
   final double cardItemMargin = 13.0;
   late double totalWidth;
+
+  bool isButtonVisible() {
+    if (widget.itemLength > 4) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // 더블탭 클릭 시 스크롤 중복 방지
   bool _isScrolling = false;
@@ -72,11 +80,11 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (widget.isButtonVisible) moveButton(isNext: false),
+        if (isButtonVisible()) moveButton(isNext: false),
         const SizedBox(width: 10),
         itemListView(),
         const SizedBox(width: 10),
-        if (widget.isButtonVisible) moveButton(isNext: true),
+        if (isButtonVisible()) moveButton(isNext: true),
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/home/home_screen.dart';
+import 'package:do_in_web/screen/profile/edit/profile_content_add_screen.dart';
 import 'package:do_in_web/screen/profile/edit/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,6 +31,11 @@ class MyApp extends StatelessWidget {
             path: 'profile_edit',
             name: 'profile_edit',
             builder: (context, state) => ProfileEditScreen(),
+          ),
+          GoRoute(
+            path: 'profile_content_add',
+            name: 'profile_content_add',
+            builder: (context, state) => ProfileContentAddScreen(),
           ),
         ],
       ),

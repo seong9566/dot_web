@@ -2,8 +2,8 @@ import 'package:do_in_web/screen/profile/edit/widget/header_bar.dart';
 import 'package:do_in_web/screen/widget/search_field.dart';
 import 'package:flutter/material.dart';
 
-import '../../profile_view_model.dart';
-import 'content_list_widget.dart';
+import '../profile_view_model.dart';
+import 'widget/content_list_widget.dart';
 
 class EditContentsScreen extends StatefulWidget {
   const EditContentsScreen({super.key});

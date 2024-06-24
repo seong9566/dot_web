@@ -1,7 +1,10 @@
 import 'package:do_in_web/screen/profile/edit/data/dumy_contents.dart';
+import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
+import 'package:do_in_web/screen/widget/banner_item.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../model/profile_image_card.dart';
+import 'edit/data/general_widget_model.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   ProfileViewModel._();
@@ -16,8 +19,43 @@ class ProfileViewModel extends ChangeNotifier {
   List<String> tagList = ["Tags"];
   List<String> dateList = ["Date", "최신순", "오래된 순"];
 
+  List<Widget> widgetDataList = [
+    SwiperCardWidget(
+      isEdit: false,
+      cardItem: profileImageCardList,
+      itemLength: profileImageCardList.length,
+    )
+  ];
+
   bool get isAllChecked => selectedItems.length == items.length;
   Set<DumyContents> selectedItems = {};
+
+  GeneralWidgetModel? _selectedWidget;
+
+  GeneralWidgetModel? get selectedWidget => _selectedWidget;
+
+  void setSelectedItem(GeneralWidgetModel? item) {
+    _selectedWidget = item;
+    notifyListeners();
+  }
+
+  void addWidgetItem() {
+    switch (_selectedWidget!.widgetName) {
+      case "bannerWidget":
+        widgetDataList.add(BannerItem());
+        _selectedWidget = null;
+        break;
+      case "sliderCard2":
+        widgetDataList.add(SwiperCardWidget(
+          isEdit: false,
+          cardItem: profileImageCardList,
+          itemLength: profileImageCardList.length,
+        ));
+        _selectedWidget = null;
+        break;
+    }
+    notifyListeners();
+  }
 
   void toggleAllSelection(bool isSelected) {
     if (isSelected) {
@@ -56,17 +94,6 @@ class ProfileViewModel extends ChangeNotifier {
     print("Delete후 아이템 : ${filteredItem.length}");
     notifyListeners();
   }
-
-  final List<ProfileImageCard> profileImageCardList = [
-    ProfileImageCard('assets/testImage1.png', '이미지 제목1'),
-    ProfileImageCard('assets/testImage2.png', '이미지 제목2'),
-    ProfileImageCard('assets/testImage3.png', '이미지 제목3'),
-    ProfileImageCard('assets/testImage4.png', '이미지 제목4'),
-    ProfileImageCard('assets/testImage1.png', '이미지 제목5'),
-    ProfileImageCard('assets/testImage2.png', '이미지 제목6'),
-    ProfileImageCard('assets/testImage3.png', '이미지 제목7'),
-    ProfileImageCard('assets/testImage3.png', '이미지 제목8'),
-  ];
 
   void setContentsBarItems({required List<DumyContents> contentsList}) {
     typeList.addAll(

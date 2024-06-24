@@ -1,9 +1,9 @@
 import 'package:do_in_web/screen/default_layout.dart';
-import 'package:do_in_web/screen/profile/edit/widget/edit_contents_widget.dart';
-import 'package:do_in_web/screen/profile/edit/widget/edit_widgets_widget.dart';
-import 'package:do_in_web/screen/profile/edit/widget/profile_contents_bottom_nav.dart';
+import 'package:do_in_web/screen/profile/edit/edit_contents_screen.dart';
+import 'package:do_in_web/screen/profile/edit/edit_widgets_screen.dart';
+import 'package:do_in_web/screen/profile/bottom_nav/profile_contents_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
-import 'package:do_in_web/screen/profile/edit/widget/profile_widget_bottom_nav.dart';
+import 'package:do_in_web/screen/profile/bottom_nav/profile_widget_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:do_in_web/screen/widget/widget_utils.dart';
 import 'package:do_in_web/util/color_assets.dart';
@@ -20,8 +20,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final ProfileViewModel profileVm = ProfileViewModel();
   Function()? listener;
 
-  bool isWidgetBtnClick = false;
-  bool isContentsBtnClick = true;
+  bool isWidgetBtnClick = true;
+  bool isContentsBtnClick = false;
 
   double widgetAndContentsWidget = 156.0;
   double widgetAndContentsHeight = 40.0;

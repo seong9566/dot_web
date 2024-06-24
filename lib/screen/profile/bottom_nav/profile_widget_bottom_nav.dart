@@ -1,10 +1,11 @@
-import 'package:do_in_web/model/chat_model.dart';
+import 'package:do_in_web/screen/profile/bottom_nav/widget/widget_grid_item.dart';
+import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/util/color_assets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
+
+import '../edit/data/general_widget_model.dart';
 
 class ProfileWidgetBottomNav extends StatefulWidget {
   @override
@@ -12,31 +13,85 @@ class ProfileWidgetBottomNav extends StatefulWidget {
 }
 
 class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
+  final List<GeneralWidgetModel> widgetList = [
+    GeneralWidgetModel(
+        widgetName: "bannerWidget",
+        captureWidget: "assets/widget_image/widget_banner.png"),
+    GeneralWidgetModel(
+        widgetName: "sliderCard",
+        captureWidget: "assets/widget_image/widget_slider_card.png"),
+    GeneralWidgetModel(
+        widgetName: "sliderCard2",
+        captureWidget: "assets/widget_image/widget_slider_card_2.png"),
+    GeneralWidgetModel(
+        widgetName: "bannerWidget",
+        captureWidget: "assets/widget_image/widget_banner.png"),
+    GeneralWidgetModel(
+        widgetName: "sliderCard",
+        captureWidget: "assets/widget_image/widget_slider_card.png"),
+    GeneralWidgetModel(
+        widgetName: "sliderCard2",
+        captureWidget: "assets/widget_image/widget_slider_card_2.png"),
+  ];
+
   double _height = 80.0; // 초기 높이
   double _width = 480.0;
-  double _clickHeight = 232.0;
-  double _clickWidth = 480;
+  double _clickHeight = 600.0;
+  double _clickWidth = 1288.0;
   bool onHover = false;
   bool isWidgetOnEnter = false;
   bool isPageOnEnter = false;
-
   double _bottomPadding = 6.0;
+
+  final ProfileViewModel profileVm = ProfileViewModel();
+  Function()? listener;
+
+  @override
+  void initState() {
+    if (mounted) {
+      listener = () {
+        setState(() {});
+      };
+    }
+    profileVm.addListener(listener!);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    profileVm.removeListener(listener!);
+    listener = null;
+    super.dispose();
+  }
+
+  void onEnter() {
+    setState(() {
+      _height = _clickHeight;
+      _width = _clickWidth;
+      onHover = true;
+    });
+  }
+
+  void onExit() {
+    setState(() {
+      _height = 80.0;
+      _width = 480.0;
+      onHover = false;
+    });
+  }
+
+  void onItemTap(GeneralWidgetModel item) {
+    profileVm.setSelectedItem(profileVm.selectedItems == item ? null : item);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       // margin: EdgeInsets.only(bottom: 20, left: _width, right: _width),
       child: MouseRegion(
-        onEnter: (PointerEnterEvent event) => setState(() {
-          _height = _clickHeight;
-          _width = _clickWidth;
-          onHover = true;
-        }), // 마우스를 올렸을 때 높이 변경
-        onExit: (PointerExitEvent event) => setState(() {
-          _height = 80.0;
-          _width = 480.0;
-          onHover = false;
-        }), // 마우스를 내렸을 때 높이 변경
+        onEnter: (PointerEnterEvent event) => onEnter(), // 마우스를 올렸을 때 높이 변경
+        onExit: (PointerExitEvent event) => onExit(), // 마우스를 내렸을 때 높이 변경
         child: AnimatedContainer(
           margin: const EdgeInsets.only(bottom: 20),
           height: _height,
@@ -51,30 +106,7 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
           ),
           child: Stack(
             children: [
-              AnimatedPositioned(
-                top: 6,
-                left: 6,
-                duration: const Duration(milliseconds: 100),
-                curve: Curves.fastOutSlowIn,
-                child: Container(
-                  width: onHover ? 480 - 12 : 0,
-                  height: onHover ? 146 : 0,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(45),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _button("메인 페이지", () {}),
-                      SizedBox(height: 40),
-                      _button("그룹 게시판", () {}),
-                    ],
-                  ),
-                ),
-              ),
+              _body(),
               widgetAndPageBtn(),
               bottomNavItems(),
             ],
@@ -84,35 +116,81 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
     );
   }
 
-  Widget _button(String title, VoidCallback callback) {
-    return GestureDetector(
-      onTap: callback,
+  Widget _body() {
+    final double onHoverWidth = 1272.0;
+    final double onHoverHeight = 514.0;
+    return AnimatedPositioned(
+      top: 6,
+      left: 6,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.fastOutSlowIn,
       child: Container(
-        width: 200,
-        decoration: BoxDecoration(
-          color: ColorAssets.whiteColor,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
+        width: onHover ? onHoverWidth : 0,
+        height: onHover ? onHoverHeight : 0,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(45),
           ),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              offset: Offset(0, 0),
-              blurRadius: 8,
-            ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _selectWidgetBtn(),
+            _gridView(),
           ],
         ),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w400,
-              color: ColorAssets.blackColor,
-            ),
-          ),
-        ),
       ),
+    );
+  }
+
+  Widget _gridView() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      height: 470,
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
+            childAspectRatio: 349 / 240),
+        itemCount: widgetList.length,
+        itemBuilder: (context, index) {
+          return WidgetGridItem(
+            model: widgetList[index],
+            isSelected: profileVm.selectedWidget == widgetList[index],
+            onTap: () => onItemTap(widgetList[index]),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _selectWidgetBtn() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "GENERAL WIDGET",
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: ColorAssets.primaryColor),
+        ),
+        const SizedBox(width: 10),
+        VerticalDivider(
+          width: 3,
+          color: ColorAssets.primaryColor,
+        ),
+        const SizedBox(width: 10),
+        Text(
+          "PRO-WIDGETS",
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: ColorAssets.primaryColor),
+        )
+      ],
     );
   }
 
@@ -130,7 +208,11 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
           ...bottomNavDot(),
           bottomNavItem(
             Image.asset("assets/bottom_nav/icon_confirm.png"),
-            () {},
+            () async {
+              //Add Item
+              print("confirm버튼 실행");
+              profileVm.addWidgetItem();
+            },
           ),
         ],
       ),

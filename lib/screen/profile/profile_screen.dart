@@ -1,6 +1,6 @@
 import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
-import 'package:do_in_web/screen/profile/widget/profile_bottom_nav.dart';
+import 'package:do_in_web/screen/profile/bottom_nav/profile_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -35,14 +35,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  bool isButtonVisible() {
-    if (profileVm.profileImageCardList.length > 4) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,11 +59,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
             const SizedBox(height: 80),
-            SwiperCardWidget(
-              isEdit: false,
-              cardItem: profileVm.profileImageCardList,
-              isButtonVisible: isButtonVisible(),
-            ),
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: profileVm.widgetDataList.length,
+                itemBuilder: (context, index) {
+                  return profileVm.widgetDataList[index];
+                }),
             const SizedBox(height: 300),
           ],
         ),
