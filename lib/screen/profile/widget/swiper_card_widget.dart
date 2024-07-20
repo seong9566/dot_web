@@ -81,11 +81,16 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(width: 40),
+
         if (isButtonVisible()) moveButton(isNext: false),
-        const SizedBox(width: 10),
+        // const SizedBox(width: 10),
+        const Spacer(),
         itemListView(),
-        const SizedBox(width: 10),
+        // const SizedBox(width: 10),
+        const Spacer(),
         if (isButtonVisible()) moveButton(isNext: true),
+        const SizedBox(width: 40),
       ],
     );
   }

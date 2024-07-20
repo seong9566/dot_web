@@ -82,12 +82,17 @@ class _BannerItemState extends State<BannerItem> {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(width: 40),
               moveButton(isNext: false),
-              const SizedBox(width: 10),
+              const Spacer(),
+              // const SizedBox(width: 10),
               banner(),
-              const SizedBox(width: 10),
+              // const SizedBox(width: 10),
+              const Spacer(),
               moveButton(isNext: true),
+              const SizedBox(width: 40),
             ],
           ),
           const SizedBox(height: 20),

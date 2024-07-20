@@ -23,7 +23,6 @@ class WidgetGridItem extends StatefulWidget {
 
 class _WidgetGridItemState extends State<WidgetGridItem> {
   late bool _isHovered;
-  late bool _isSelected;
   ProfileViewModel vm = ProfileViewModel();
   Function()? listener;
 
@@ -36,13 +35,13 @@ class _WidgetGridItemState extends State<WidgetGridItem> {
     }
     vm.addListener(listener!);
     _isHovered = false;
-    _isSelected = false;
     super.initState();
   }
 
   @override
   void dispose() {
-    vm.dispose();
+    vm.removeListener(listener!);
+    listener = null;
     super.dispose();
   }
 
@@ -53,18 +52,9 @@ class _WidgetGridItemState extends State<WidgetGridItem> {
     });
   }
 
-  // 아이템 선택
-  void selectedItem() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-    widget.onTap();
-  }
-
   // BottomNav가 닫히면 초기화
   Future<void> setDefault() async {
     _isHovered = false;
-    _isSelected = false;
   }
 
   @override
@@ -74,7 +64,7 @@ class _WidgetGridItemState extends State<WidgetGridItem> {
     }
     return GestureDetector(
       onTap: () {
-        selectedItem();
+        widget.onTap();
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),

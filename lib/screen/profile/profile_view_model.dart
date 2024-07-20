@@ -1,7 +1,9 @@
+import 'package:do_in_web/global_nav_key.dart';
 import 'package:do_in_web/screen/profile/edit/data/dumy_contents.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:do_in_web/screen/widget/banner_item.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../model/profile_image_card.dart';
 import 'edit/data/general_widget_model.dart';
@@ -34,12 +36,13 @@ class ProfileViewModel extends ChangeNotifier {
 
   GeneralWidgetModel? get selectedWidget => _selectedWidget;
 
-  void setSelectedItem(GeneralWidgetModel? item) {
+  Future<void> setSelectedItem(GeneralWidgetModel? item) async {
     if (_selectedWidget != null) {
       _selectedWidget = item;
       notifyListeners();
     }
     _selectedWidget = item;
+
     notifyListeners();
   }
 

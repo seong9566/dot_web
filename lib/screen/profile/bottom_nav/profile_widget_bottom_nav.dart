@@ -81,10 +81,6 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
     });
   }
 
-  void onItemTap(GeneralWidgetModel item) {
-    profileVm.setSelectedItem(profileVm.selectedItems == item ? null : item);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -161,7 +157,9 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
             bottomNavOnHover: bottomNavOnHover,
             model: widgetList[index],
             isSelected: profileVm.selectedWidget == widgetList[index],
-            onTap: () => onItemTap(widgetList[index]),
+            onTap: () async {
+              profileVm.setSelectedItem(widgetList[index]);
+            },
           );
         },
       ),
