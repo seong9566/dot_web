@@ -1,4 +1,5 @@
-import 'package:do_in_web/util/color_assets.dart';
+import 'package:do_in_web/common/import_util.dart';
+
 import 'package:flutter/material.dart';
 
 class SearchField extends StatefulWidget {

@@ -1,10 +1,9 @@
 import 'package:do_in_web/screen/widget/widget_utils.dart';
-import 'package:do_in_web/util/color_assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:do_in_web/common/import_util.dart';
 
 class ProfileBottomNav extends StatefulWidget {
   @override

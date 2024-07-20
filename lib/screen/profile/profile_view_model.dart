@@ -35,6 +35,10 @@ class ProfileViewModel extends ChangeNotifier {
   GeneralWidgetModel? get selectedWidget => _selectedWidget;
 
   void setSelectedItem(GeneralWidgetModel? item) {
+    if (_selectedWidget != null) {
+      _selectedWidget = item;
+      notifyListeners();
+    }
     _selectedWidget = item;
     notifyListeners();
   }

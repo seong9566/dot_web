@@ -1,4 +1,3 @@
-import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/home/home_screen.dart';
 import 'package:do_in_web/screen/profile/edit/profile_content_add_screen.dart';
 import 'package:do_in_web/screen/profile/edit/profile_edit_screen.dart';
@@ -20,22 +19,22 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => HomeScreen(),
+        builder: (context, state) => const HomeScreen(),
         routes: [
           GoRoute(
             path: 'profile',
             name: 'profile',
-            builder: (context, state) => ProfileScreen(),
+            builder: (context, state) => const ProfileScreen(),
           ),
           GoRoute(
             path: 'profile_edit',
             name: 'profile_edit',
-            builder: (context, state) => ProfileEditScreen(),
+            builder: (context, state) => const ProfileEditScreen(),
           ),
           GoRoute(
             path: 'profile_content_add',
             name: 'profile_content_add',
-            builder: (context, state) => ProfileContentAddScreen(),
+            builder: (context, state) => const ProfileContentAddScreen(),
           ),
         ],
       ),

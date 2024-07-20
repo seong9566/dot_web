@@ -1,6 +1,7 @@
 import 'package:do_in_web/screen/profile/bottom_nav/widget/widget_grid_item.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
-import 'package:do_in_web/util/color_assets.dart';
+import 'package:do_in_web/common/import_util.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,7 +39,7 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
   double _width = 480.0;
   double _clickHeight = 600.0;
   double _clickWidth = 1288.0;
-  bool onHover = false;
+  bool bottomNavOnHover = false;
   bool isWidgetOnEnter = false;
   bool isPageOnEnter = false;
   double _bottomPadding = 6.0;
@@ -68,7 +69,7 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
     setState(() {
       _height = _clickHeight;
       _width = _clickWidth;
-      onHover = true;
+      bottomNavOnHover = true;
     });
   }
 
@@ -76,7 +77,7 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
     setState(() {
       _height = 80.0;
       _width = 480.0;
-      onHover = false;
+      bottomNavOnHover = false;
     });
   }
 
@@ -117,16 +118,16 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
   }
 
   Widget _body() {
-    final double onHoverWidth = 1272.0;
-    final double onHoverHeight = 514.0;
+    const double onHoverWidth = 1272.0;
+    const double onHoverHeight = 514.0;
     return AnimatedPositioned(
       top: 6,
       left: 6,
       duration: const Duration(milliseconds: 100),
       curve: Curves.fastOutSlowIn,
       child: Container(
-        width: onHover ? onHoverWidth : 0,
-        height: onHover ? onHoverHeight : 0,
+        width: bottomNavOnHover ? onHoverWidth : 0,
+        height: bottomNavOnHover ? onHoverHeight : 0,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -137,14 +138,14 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _selectWidgetBtn(),
-            _gridView(),
+            _gridView(bottomNavOnHover),
           ],
         ),
       ),
     );
   }
 
-  Widget _gridView() {
+  Widget _gridView(bool bottomNavOnHover) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: 470,
@@ -157,6 +158,7 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
         itemCount: widgetList.length,
         itemBuilder: (context, index) {
           return WidgetGridItem(
+            bottomNavOnHover: bottomNavOnHover,
             model: widgetList[index],
             isSelected: profileVm.selectedWidget == widgetList[index],
             onTap: () => onItemTap(widgetList[index]),
@@ -210,7 +212,6 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
             Image.asset("assets/bottom_nav/icon_confirm.png"),
             () async {
               //Add Item
-              print("confirm버튼 실행");
               profileVm.addWidgetItem();
             },
           ),

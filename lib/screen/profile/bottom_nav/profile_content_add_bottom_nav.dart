@@ -1,6 +1,6 @@
-import 'package:do_in_web/model/chat_model.dart';
 import 'package:do_in_web/screen/widget/dot_dialog.dart';
-import 'package:do_in_web/util/color_assets.dart';
+import 'package:do_in_web/common/import_util.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

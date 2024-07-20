@@ -1,6 +1,7 @@
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/screen/profile/widget/custom_check_box.dart';
-import 'package:do_in_web/util/color_assets.dart';
+import 'package:do_in_web/common/import_util.dart';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

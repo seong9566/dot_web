@@ -1,7 +1,6 @@
 import 'package:do_in_web/screen/default_layout.dart';
-import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/screen/profile/bottom_nav/profile_bottom_nav.dart';
-import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
+import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/search_field.dart';
