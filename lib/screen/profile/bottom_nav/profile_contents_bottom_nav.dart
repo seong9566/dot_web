@@ -13,14 +13,14 @@ class ProfileContentsBottomNav extends StatefulWidget {
 }
 
 class _ProfileContentsBottomNavState extends State<ProfileContentsBottomNav> {
-  double _height = 80.0; // 초기 높이
-  double _width = 480.0;
-  double _clickHeight = 232.0;
-  double _clickWidth = 480;
+  final double _height = 80.0; // 초기 높이
+  final double _width = 480.0;
+  final double _clickHeight = 232.0;
+  final double _clickWidth = 480;
   bool onHover = false;
   bool isWidgetOnEnter = false;
   bool isPageOnEnter = false;
-  double _bottomPadding = 6.0;
+  final double _bottomPadding = 6.0;
 
   final ProfileViewModel profileVm = ProfileViewModel();
   Function()? listener;
