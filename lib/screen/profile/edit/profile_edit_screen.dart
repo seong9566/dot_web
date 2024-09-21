@@ -18,7 +18,7 @@ class ProfileEditScreen extends StatefulWidget {
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final ProfileViewModel profileVm = ProfileViewModel();
-  final ProfileEditViewModel editController = ProfileEditViewModel();
+  final ProfileEditViewModel profileEditVm = ProfileEditViewModel();
   Function()? listener;
 
   bool isWidgetBtnClick = true;
@@ -34,14 +34,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         setState(() {});
       };
     }
-    editController.addListener(listener!);
+    profileEditVm.addListener(listener!);
     profileVm.addListener(listener!);
+    profileEditVm.initDataList();
     super.initState();
   }
 
   @override
   void dispose() {
-    editController.removeListener(listener!);
+    profileEditVm.removeListener(listener!);
     profileVm.removeListener(listener!);
     listener = null;
     super.dispose();

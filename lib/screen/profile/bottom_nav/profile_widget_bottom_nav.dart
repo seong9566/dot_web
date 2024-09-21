@@ -1,11 +1,13 @@
 import 'package:do_in_web/screen/profile/bottom_nav/widget/widget_grid_item.dart';
 import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
+import 'package:do_in_web/screen/profile/edit/widget/result_dialog.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/common/import_util.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 
 import '../edit/data/general_widget_model.dart';
 
@@ -207,14 +209,27 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
         children: [
           bottomNavItem(
             Image.asset("assets/bottom_nav/icon_cancel.png"),
-            () {},
+            () {
+              ResultDialog().showCancelDialog(context, () async {
+                await profileEditVm.cancel();
+                if (mounted) {
+                  context.pop();
+                  context.pushReplacementNamed("profile");
+                }
+              });
+            },
           ),
           const SizedBox(width: 20),
           bottomNavItem(
             Image.asset("assets/bottom_nav/icon_confirm.png"),
             () async {
-              //Add Item
-              // result Dialog띄우기
+              ResultDialog().showConfirmDialog(context, () async {
+                await profileEditVm.confirm();
+                if (mounted) {
+                  context.pop();
+                  context.pushReplacementNamed("profile");
+                }
+              });
             },
           ),
         ],

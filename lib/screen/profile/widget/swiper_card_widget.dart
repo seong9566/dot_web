@@ -1,10 +1,6 @@
 import 'package:do_in_web/common/import_util.dart';
-import 'package:do_in_web/screen/profile/profile_view_model.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 
 class SwiperCardWidget extends StatefulWidget {
   final dynamic cardItem;

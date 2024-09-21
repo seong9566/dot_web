@@ -1,8 +1,6 @@
-import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
-import 'package:do_in_web/screen/profile/profile_view_model.dart';
-import 'package:flutter/material.dart';
-
 import 'package:do_in_web/common/import_util.dart';
+import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
+import 'package:flutter/material.dart';
 
 import '../../edit/data/general_widget_model.dart';
 

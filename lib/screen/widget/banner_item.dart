@@ -1,9 +1,8 @@
+import 'package:do_in_web/common/import_util.dart';
 import 'package:do_in_web/screen/home/home_view_model.dart';
 import 'package:do_in_web/screen/widget/like_and_view_counter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:do_in_web/common/import_util.dart';
 
 class BannerItem extends StatefulWidget {
   bool? isEdit;

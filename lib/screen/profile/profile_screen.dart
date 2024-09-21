@@ -36,6 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Profile Screen build !!");
     return Scaffold(
       body: _body(),
       bottomNavigationBar: ProfileBottomNav(),
