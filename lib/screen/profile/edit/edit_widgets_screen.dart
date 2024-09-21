@@ -2,8 +2,9 @@ import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
 import 'package:do_in_web/screen/profile/edit/widget/edit_widget_dialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../widget/banner_item.dart';
 import '../profile_view_model.dart';
-import '../widget/swiper_card_widget.dart';
+import '../../widget/swiper_card_widget.dart';
 
 class EditWidgetsScreen extends StatefulWidget {
   const EditWidgetsScreen({super.key});
@@ -53,24 +54,58 @@ class _EditWidgetsScreenState extends State<EditWidgetsScreen> {
           itemCount: profileEditVm.tempWidgetList.length,
           itemBuilder: (context, index) {
             final widgetItem = profileEditVm.tempWidgetList[index];
-
             return Container(
               margin: const EdgeInsets.only(bottom: 50, top: 50),
-              child: widgetItem is SwiperCardWidget
-                  ? SwiperCardWidget(
-                      isEdit: widgetItem.isEdit,
-                      cardItem: widgetItem.cardItem,
-                      itemLength: widgetItem.itemLength,
-                      deleteCallback: () {
-                        profileEditVm.deleteWidget(index);
-                      },
-                      editCallback: () {
-                        showSwiperEditDialog();
-                        // profileVm.editSwiperCardWidget();
-                      },
-                    )
-                  : widgetItem, // SwiperCardWidget이 아닌 경우 그대로 표시
+              child: Builder(
+                builder: (context) {
+                  switch (widgetItem.runtimeType) {
+                    case SwiperCardWidget:
+                      final swiperItem =
+                          widgetItem as SwiperCardWidget; // 타입 캐스팅
+                      return SwiperCardWidget(
+                        isEdit: swiperItem.isEdit,
+                        cardItem: swiperItem.cardItem,
+                        itemLength: swiperItem.itemLength,
+                        deleteCallback: () {
+                          profileEditVm.deleteWidget(index);
+                        },
+                        editCallback: () {
+                          showSwiperEditDialog();
+                          // profileVm.editSwiperCardWidget();
+                        },
+                      );
+                    case BannerItem:
+                      final bannerItem = widgetItem as BannerItem;
+                      return BannerItem(
+                        isEdit: bannerItem.isEdit,
+                        deleteCallback: () {
+                          profileEditVm.deleteWidget(index);
+                        },
+                        editCallback: () {},
+                      );
+                    default:
+                      return widgetItem; // 다른 위젯이 있을 경우 기본 값으로 처리
+                  }
+                },
+              ),
             );
+            // return Container(
+            //   margin: const EdgeInsets.only(bottom: 50, top: 50),
+            //   child: widgetItem is SwiperCardWidget
+            //       ? SwiperCardWidget(
+            //           isEdit: widgetItem.isEdit,
+            //           cardItem: widgetItem.cardItem,
+            //           itemLength: widgetItem.itemLength,
+            //           deleteCallback: () {
+            //             profileEditVm.deleteWidget(index);
+            //           },
+            //           editCallback: () {
+            //             showSwiperEditDialog();
+            //             // profileVm.editSwiperCardWidget();
+            //           },
+            //         )
+            //       : widgetItem, // SwiperCardWidget이 아닌 경우 그대로 표시
+            // );
           },
         ),
       ],

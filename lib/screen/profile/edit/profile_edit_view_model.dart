@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../model/profile_image_card.dart';
 import '../../widget/banner_item.dart';
-import '../widget/swiper_card_widget.dart';
+import '../../widget/swiper_card_widget.dart';
 import 'data/general_widget_model.dart';
 
 // 임시 Model과 완성된 Model이 필요.
@@ -49,7 +49,11 @@ class ProfileEditViewModel extends ChangeNotifier {
           editCallback: () {},
         );
       } else if (widget is BannerItem) {
-        return BannerItem(isEdit: true);
+        return BannerItem(
+          isEdit: true,
+          deleteCallback: () {},
+          editCallback: () {},
+        );
       } else {
         return widget;
       }
@@ -61,7 +65,11 @@ class ProfileEditViewModel extends ChangeNotifier {
   void addWidgetItem(GeneralWidgetModel? item) {
     switch (item!.widgetName) {
       case "bannerWidget":
-        tempWidgetList.add(BannerItem());
+        tempWidgetList.add(BannerItem(
+          isEdit: true,
+          editCallback: () {},
+          deleteCallback: () {},
+        ));
         item = null;
         break;
       case "sliderCard2":

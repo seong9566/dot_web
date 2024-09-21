@@ -1,5 +1,5 @@
 import 'package:do_in_web/screen/profile/edit/data/dumy_contents.dart';
-import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
+import 'package:do_in_web/screen/widget/swiper_card_widget.dart';
 import 'package:do_in_web/screen/widget/banner_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

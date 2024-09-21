@@ -5,8 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BannerItem extends StatefulWidget {
-  bool? isEdit;
-  BannerItem({this.isEdit = false, super.key});
+  bool isEdit;
+  final VoidCallback? deleteCallback;
+  final VoidCallback? editCallback;
+  BannerItem(
+      {this.isEdit = false, super.key, this.deleteCallback, this.editCallback});
 
   @override
   State<BannerItem> createState() => _BannerItemState();
@@ -139,31 +142,44 @@ class _BannerItemState extends State<BannerItem> {
   }
 
   Widget banner() {
-    return Container(
-      width: bannerWidget,
-      height: bannerHeight,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(270),
-          bottomRight: Radius.circular(270),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2), // 그림자의 색상과 불투명도 조절
-            spreadRadius: 5, // 그림자의 확산 정도
-            blurRadius: 9, // 그림자의 흐림 정도
-            offset: const Offset(0, 1), // 그림자의 위치 조정 (x, y)
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        (widget.isEdit)
+            ? editButton(
+                deleteCallback: widget.deleteCallback!,
+                editCallback: widget.editCallback!,
+              )
+            : plusButton(() {}),
+        const SizedBox(height: 16),
+        Container(
+          width: bannerWidget,
+          height: bannerHeight,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(270),
+              bottomRight: Radius.circular(270),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2), // 그림자의 색상과 불투명도 조절
+                spreadRadius: 5, // 그림자의 확산 정도
+                blurRadius: 9, // 그림자의 흐림 정도
+                offset: const Offset(0, 1), // 그림자의 위치 조정 (x, y)
+              ),
+            ],
           ),
-        ],
-      ),
-      child: PageView.builder(
-        physics: const BouncingScrollPhysics(),
-        controller: bannerController,
-        itemCount: homeVm.homeBannerList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Center(child: Text("${homeVm.homeBannerList[index].title}"));
-        },
-      ),
+          child: PageView.builder(
+            physics: const BouncingScrollPhysics(),
+            controller: bannerController,
+            itemCount: homeVm.homeBannerList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Center(
+                  child: Text("${homeVm.homeBannerList[index].title}"));
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -224,6 +240,84 @@ class _BannerItemState extends State<BannerItem> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget editButton(
+      {required VoidCallback editCallback,
+      required VoidCallback deleteCallback}) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 16),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: editCallback,
+            child: Container(
+              width: 48,
+              height: 20,
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              margin: const EdgeInsets.only(right: 12),
+              decoration: BoxDecoration(
+                color: ColorAssets.primaryColor.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  "EDIT",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: ColorAssets.blackColor,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: deleteCallback,
+            child: Container(
+              width: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorAssets.cancelButtonColor.withOpacity(0.3),
+              ),
+              child: const Center(
+                child: Text(
+                  "X",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget plusButton(VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 80,
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        margin: const EdgeInsets.only(right: 12),
+        decoration: BoxDecoration(
+          color: ColorAssets.greyColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Center(
+          child: Text(
+            "+ ALL",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }
