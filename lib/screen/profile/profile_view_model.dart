@@ -1,4 +1,3 @@
-import 'package:do_in_web/global_nav_key.dart';
 import 'package:do_in_web/screen/profile/edit/data/dumy_contents.dart';
 import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:do_in_web/screen/widget/banner_item.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../model/profile_image_card.dart';
 import 'edit/data/general_widget_model.dart';
 
+/// 여기서는 완성된 Model만 있으면 된다.
 class ProfileViewModel extends ChangeNotifier {
   ProfileViewModel._();
   static final ProfileViewModel _instance = ProfileViewModel._();
@@ -26,8 +26,11 @@ class ProfileViewModel extends ChangeNotifier {
       isEdit: false,
       cardItem: profileImageCardList,
       itemLength: profileImageCardList.length,
-    )
+    ),
+    BannerItem(),
   ];
+
+  List<Widget> editWidgetDataList = [];
 
   bool get isAllChecked => selectedItems.length == items.length;
   Set<DumyContents> selectedItems = {};
@@ -123,4 +126,17 @@ class ProfileViewModel extends ChangeNotifier {
   void checkFilter() {}
 
   void widgetMove() {}
+
+  Future<void> editSwiperCardWidget() async {
+    // 위젯 타이틀 , 카드 길이, Radius, Content 길이
+  }
+
+  // 수정 페이지에서 위젯을 지울 때
+  Future<void> deleteWidget(int index) async {
+    editWidgetDataList.removeAt(index);
+    widgetDataList = editWidgetDataList;
+    debugPrint("editWidgetDataList: ${editWidgetDataList}");
+    debugPrint("widgetDataList: ${widgetDataList}");
+    notifyListeners();
+  }
 }

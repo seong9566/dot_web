@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:do_in_web/common/import_util.dart';
 
 class BannerItem extends StatefulWidget {
-  const BannerItem({super.key});
+  bool? isEdit;
+  BannerItem({this.isEdit = false, super.key});
 
   @override
   State<BannerItem> createState() => _BannerItemState();
@@ -78,21 +79,17 @@ class _BannerItemState extends State<BannerItem> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: bannerWidget + 20 + (buttonWidth * 2),
+      width: 1340,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(width: 40),
               moveButton(isNext: false),
-              const Spacer(),
-              // const SizedBox(width: 10),
+              const SizedBox(width: 10),
               banner(),
-              // const SizedBox(width: 10),
-              const Spacer(),
+              const SizedBox(width: 10),
               moveButton(isNext: true),
-              const SizedBox(width: 40),
             ],
           ),
           const SizedBox(height: 20),
@@ -121,8 +118,8 @@ class _BannerItemState extends State<BannerItem> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 30,
+        height: 30,
         decoration: BoxDecoration(
           color: ColorAssets.bannerButtonColor,
           shape: BoxShape.circle,

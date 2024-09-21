@@ -4,10 +4,12 @@ import 'package:do_in_web/screen/profile/edit/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'screen/profile/profile_screen.dart';
 
 void main() {
+  usePathUrlStrategy();
   runApp(MyApp());
 }
 
@@ -24,17 +26,23 @@ class MyApp extends StatelessWidget {
           GoRoute(
             path: 'profile',
             name: 'profile',
-            builder: (context, state) => const ProfileScreen(),
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: ProfileScreen());
+            },
           ),
           GoRoute(
             path: 'profile_edit',
             name: 'profile_edit',
-            builder: (context, state) => const ProfileEditScreen(),
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: ProfileEditScreen());
+            },
           ),
           GoRoute(
             path: 'profile_content_add',
             name: 'profile_content_add',
-            builder: (context, state) => const ProfileContentAddScreen(),
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: ProfileContentAddScreen());
+            },
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/widget/animated_bottom_nav.dart';
 import 'package:do_in_web/screen/widget/banner_item.dart';
 import 'package:do_in_web/screen/widget/search_field.dart';
@@ -16,18 +17,20 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _body() {
-    return const SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 80),
-            SearchField(leftIcon: false),
-            SizedBox(height: 80),
-            BannerItem(),
-            SizedBox(height: 300),
-          ],
+    return DefaultLayout(
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 80),
+              const SearchField(leftIcon: false),
+              const SizedBox(height: 80),
+              BannerItem(),
+              const SizedBox(height: 300),
+            ],
+          ),
         ),
       ),
     );

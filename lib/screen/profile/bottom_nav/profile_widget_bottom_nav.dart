@@ -1,4 +1,5 @@
 import 'package:do_in_web/screen/profile/bottom_nav/widget/widget_grid_item.dart';
+import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/common/import_util.dart';
 
@@ -45,6 +46,7 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
   double _bottomPadding = 6.0;
 
   final ProfileViewModel profileVm = ProfileViewModel();
+  final ProfileEditViewModel profileEditVm = ProfileEditViewModel();
   Function()? listener;
 
   @override
@@ -54,12 +56,14 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
         setState(() {});
       };
     }
+    profileEditVm.addListener(listener!);
     profileVm.addListener(listener!);
     super.initState();
   }
 
   @override
   void dispose() {
+    profileEditVm.removeListener(listener!);
     profileVm.removeListener(listener!);
     listener = null;
     super.dispose();
@@ -156,9 +160,10 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
           return WidgetGridItem(
             bottomNavOnHover: bottomNavOnHover,
             model: widgetList[index],
-            isSelected: profileVm.selectedWidget == widgetList[index],
+            // isSelected: profileEditVm.selectedWidget == widgetList[index],
             onTap: () async {
-              profileVm.setSelectedItem(widgetList[index]);
+              profileEditVm.addWidgetItem(widgetList[index]);
+              // profileEditVm.setSelectedItem();
             },
           );
         },
@@ -200,17 +205,16 @@ class _ProfileWidgetBottomNavState extends State<ProfileWidgetBottomNav> {
       right: 8,
       child: Row(
         children: [
-          ...bottomNavDot(),
           bottomNavItem(
             Image.asset("assets/bottom_nav/icon_cancel.png"),
             () {},
           ),
-          ...bottomNavDot(),
+          const SizedBox(width: 20),
           bottomNavItem(
             Image.asset("assets/bottom_nav/icon_confirm.png"),
             () async {
               //Add Item
-              profileVm.addWidgetItem();
+              // result Dialog띄우기
             },
           ),
         ],

@@ -58,12 +58,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
             const SizedBox(height: 80),
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: profileVm.widgetDataList.length,
-                itemBuilder: (context, index) {
-                  return profileVm.widgetDataList[index];
-                }),
+            SizedBox(
+              width: 1340,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: profileVm.widgetDataList.length,
+                  itemBuilder: (context, index) {
+                    return profileVm.widgetDataList[index];
+                  }),
+            ),
             const SizedBox(height: 300),
           ],
         ),

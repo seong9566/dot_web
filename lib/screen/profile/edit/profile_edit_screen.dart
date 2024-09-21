@@ -4,6 +4,7 @@ import 'package:do_in_web/screen/profile/bottom_nav/profile_contents_bottom_nav.
 import 'package:do_in_web/screen/profile/bottom_nav/profile_widget_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/edit/edit_contents_screen.dart';
 import 'package:do_in_web/screen/profile/edit/edit_widgets_screen.dart';
+import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:do_in_web/screen/widget/widget_utils.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class ProfileEditScreen extends StatefulWidget {
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final ProfileViewModel profileVm = ProfileViewModel();
+  final ProfileEditViewModel editController = ProfileEditViewModel();
   Function()? listener;
 
   bool isWidgetBtnClick = true;
@@ -32,12 +34,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         setState(() {});
       };
     }
+    editController.addListener(listener!);
     profileVm.addListener(listener!);
     super.initState();
   }
 
   @override
   void dispose() {
+    editController.removeListener(listener!);
     profileVm.removeListener(listener!);
     listener = null;
     super.dispose();
@@ -78,6 +82,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   Widget widgetAndContentBtn() {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         buttonItem(

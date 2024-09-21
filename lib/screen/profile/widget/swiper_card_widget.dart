@@ -1,4 +1,5 @@
 import 'package:do_in_web/common/import_util.dart';
+import 'package:do_in_web/screen/profile/profile_view_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +10,17 @@ class SwiperCardWidget extends StatefulWidget {
   final dynamic cardItem;
   final int itemLength;
   final bool isEdit;
-  const SwiperCardWidget(
-      {super.key,
-      this.cardItem,
-      required this.isEdit,
-      required this.itemLength});
+  final VoidCallback? deleteCallback;
+  final VoidCallback? editCallback;
+
+  const SwiperCardWidget({
+    super.key,
+    this.cardItem,
+    required this.isEdit,
+    required this.itemLength,
+    this.deleteCallback,
+    this.editCallback,
+  });
 
   @override
   State<SwiperCardWidget> createState() => _SwipCardWidgetState();
@@ -46,7 +53,6 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
   Future<void> _scrollNext(double itemWidth) async {
     if (_scrollController.hasClients && !_isScrolling) {
       setState(() {
-        print("버튼 클릭");
         _isScrolling = true;
       });
       await _scrollController.animateTo(
@@ -78,20 +84,18 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(width: 40),
-
-        if (isButtonVisible()) moveButton(isNext: false),
-        // const SizedBox(width: 10),
-        const Spacer(),
-        itemListView(),
-        // const SizedBox(width: 10),
-        const Spacer(),
-        if (isButtonVisible()) moveButton(isNext: true),
-        const SizedBox(width: 40),
-      ],
+    return SizedBox(
+      width: 1280,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (isButtonVisible()) moveButton(isNext: false),
+          // const SizedBox(width: 10),
+          itemListView(),
+          // const SizedBox(width: 10),
+          if (isButtonVisible()) moveButton(isNext: true),
+        ],
+      ),
     );
   }
 
@@ -122,7 +126,7 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
   /// 수정 일 경우 edit 버튼 클릭
   Widget editButton(
       {required VoidCallback editCallback,
-      required VoidCallback cancelCallback}) {
+      required VoidCallback deleteCallback}) {
     return Padding(
       padding: const EdgeInsets.only(right: 16),
       child: Row(
@@ -151,7 +155,7 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
             ),
           ),
           GestureDetector(
-            onTap: cancelCallback,
+            onTap: deleteCallback,
             child: Container(
               width: 20,
               decoration: BoxDecoration(
@@ -180,8 +184,15 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
       children: [
         (widget.isEdit)
             ? editButton(
-                cancelCallback: () {},
-                editCallback: () {},
+                deleteCallback: widget.deleteCallback!,
+                // deleteCallback: () {
+                //   // 위젯 지우기.
+                //   ProfileViewModel().deleteWidget(index);
+                // },
+                editCallback: widget.editCallback!,
+                // editCallback: () {
+                //   ProfileViewModel().editSwiperCardWidget();
+                // },
               )
             : plusButton(() {}),
         const SizedBox(height: 8),
@@ -221,8 +232,8 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 30,
+        height: 30,
         decoration: BoxDecoration(
           color: ColorAssets.bannerButtonColor,
           shape: BoxShape.circle,

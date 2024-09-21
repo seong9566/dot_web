@@ -1,3 +1,4 @@
+import 'package:do_in_web/screen/profile/edit/profile_edit_view_model.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -7,13 +8,13 @@ import '../../edit/data/general_widget_model.dart';
 
 class WidgetGridItem extends StatefulWidget {
   final GeneralWidgetModel model;
-  final bool isSelected;
+  // final bool isSelected;
   final VoidCallback onTap;
   final bool bottomNavOnHover;
   const WidgetGridItem(
       {super.key,
       required this.model,
-      required this.isSelected,
+      // required this.isSelected,
       required this.onTap,
       required this.bottomNavOnHover});
 
@@ -23,7 +24,7 @@ class WidgetGridItem extends StatefulWidget {
 
 class _WidgetGridItemState extends State<WidgetGridItem> {
   late bool _isHovered;
-  ProfileViewModel vm = ProfileViewModel();
+  ProfileEditViewModel vm = ProfileEditViewModel();
   Function()? listener;
 
   @override
@@ -86,7 +87,7 @@ class _WidgetGridItemState extends State<WidgetGridItem> {
                   child: Image.asset(widget.model.captureWidget),
                 ),
               ),
-              if (_isHovered || (vm.selectedWidget == widget.model))
+              if (_isHovered)
                 Container(
                   color: ColorAssets.primaryColor.withOpacity(0.2), // 보라색 오버레이
                 ),
