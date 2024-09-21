@@ -1,6 +1,7 @@
 import 'package:do_in_web/screen/default_layout.dart';
 import 'package:do_in_web/screen/profile/bottom_nav/profile_bottom_nav.dart';
 import 'package:do_in_web/screen/profile/profile_view_model.dart';
+import 'package:do_in_web/screen/profile/widget/swiper_card_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/search_field.dart';
@@ -65,7 +66,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   shrinkWrap: true,
                   itemCount: profileVm.widgetDataList.length,
                   itemBuilder: (context, index) {
-                    return profileVm.widgetDataList[index];
+                    final widgetItem = profileVm.widgetDataList[index];
+
+                    return widgetItem is SwiperCardWidget
+                        ? SwiperCardWidget(
+                            isEdit: false,
+                            cardItem: widgetItem.cardItem,
+                            itemLength: widgetItem.itemLength,
+                          )
+                        : widgetItem;
                   }),
             ),
             const SizedBox(height: 300),

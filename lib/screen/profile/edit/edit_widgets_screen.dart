@@ -62,7 +62,7 @@ class _EditWidgetsScreenState extends State<EditWidgetsScreen> {
                       cardItem: widgetItem.cardItem,
                       itemLength: widgetItem.itemLength,
                       deleteCallback: () {
-                        // profileEditVm.deleteWidget(index);
+                        profileEditVm.deleteWidget(index);
                       },
                       editCallback: () {
                         showSwiperEditDialog();

@@ -181,14 +181,7 @@ class _SwipCardWidgetState extends State<SwiperCardWidget> {
         (widget.isEdit)
             ? editButton(
                 deleteCallback: widget.deleteCallback!,
-                // deleteCallback: () {
-                //   // 위젯 지우기.
-                //   ProfileViewModel().deleteWidget(index);
-                // },
                 editCallback: widget.editCallback!,
-                // editCallback: () {
-                //   ProfileViewModel().editSwiperCardWidget();
-                // },
               )
             : plusButton(() {}),
         const SizedBox(height: 8),

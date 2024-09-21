@@ -66,14 +66,23 @@ class ProfileEditViewModel extends ChangeNotifier {
         break;
       case "sliderCard2":
         tempWidgetList.add(SwiperCardWidget(
-          isEdit: false,
+          isEdit: true,
           cardItem: profileImageCardList,
           itemLength: profileImageCardList.length,
+          editCallback: () {},
+          deleteCallback: () {},
         ));
         item = null;
         break;
     }
     debugPrint("tempWidgetList: ${tempWidgetList.length}");
+    notifyListeners();
+  }
+
+  // 위젯 삭제
+  Future<void> deleteWidget(int index) async {
+    tempWidgetList.removeAt(index);
+    resultWidgetList = tempWidgetList;
     notifyListeners();
   }
 
